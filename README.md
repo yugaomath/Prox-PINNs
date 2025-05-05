@@ -1,9 +1,6 @@
 # Prox-PINNs for Solving Elliptic Variational Inequalities
 
 ## Requirements
-
-## Requirements
-
 The following dependencies are required to run this project:
 
 - Python 3.x
