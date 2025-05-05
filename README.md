@@ -64,19 +64,19 @@ In the main directory, you will find several examples. For each example, you nee
 - choose the problem, e.g. ,
 
   ```
-  from Solvers.DL4EVI_1d import Solver
+  from Solvers.DL4EVI_1d_Obstacle import Solver
   ```
 
 - choose the solver, e.g. ,
 
   ```
-  from Problems.Elliptic_1d_Non_Symmetric import Problem
+  from Problems.Elliptic_1d_Symmetric import Problem
   ```
 
 - set the parameters in for problem
 
   ```
-  args_problem = {  'problem_name': problem_name,
+  args_problem =  { 'problem_name': problem_name,
                     'problem_dim': 1,
                     'problem_lb': [0.],
                     'problem_ub': [1.],
@@ -90,7 +90,7 @@ In the main directory, you will find several examples. For each example, you nee
 - set the parameters in for solver
 
   ```
-  args_solver = {  'device': device,
+  args_solver =  { 'device': device,
                    'seed': 2025,
                    'int_method': 'mesh',
                    'N_int': 50,
