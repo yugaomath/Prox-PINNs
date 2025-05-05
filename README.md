@@ -2,78 +2,70 @@
 
 ## Requirements
 - Python 3.x
-- NumPy (`numpy`)
-- SciPy (`scipy`)
-- PyTorch (`torch`)
-- Matplotlib (`matplotlib`)
+- NumPy
+- SciPy
+- PyTorch 
+- Matplotlib
 
 ## Quick Start Guide
 
-###  1. Problem Definition
-Create a problem file in `Problems/` directory with these components:
+### 1. Problem Definition
+Create a problem file in the `Problems/` directory with the following components:
 
 ```python
 def __init__(self, np_type=np.float64, torch_type=torch.float64, **args):
-    self.domain = [...]  # Define problem domain
+    self.domain = [...]  # Define problem domain [lower_bound, upper_bound]
 
 def fun_u(self, x: torch.Tensor) -> torch.Tensor:
-    return ...  # Exact solution implementation
+    return ...  # Implement exact solution
 
 def fun_f(self, x: torch.Tensor) -> torch.Tensor:
-    return ...  # Source term implementation
+    return ...  # Implement source term
 
-def evi_pinn(self, model:torch.nn.Module, x:torch.tensor)->torch.tensor:
+def evi_pinn(self, model: torch.nn.Module, x: torch.tensor) -> torch.tensor:
+    # Implement EVI-PINN specific calculations
 ```
 
 
 ### 2. Solver Implementation
-In the 'Solvers/' directory, you will find several examples of solvers. Within each solver, you can examine the function
+In the `Solvers/` directory, implement the following key functions:
 
-- ```
-  _load(self, model:torch.nn.Module, load_path:str, load_type:str)->None:
-  ```
 
-- ```
-  _save(self, model:torch.nn.Module, save_path:str, save_type:str)->None:
-  ```
+    def _load(self, model: torch.nn.Module, load_path: str, load_type: str) -> None:
+        # Load model from specified path
+    
+    def _save(self, model: torch.nn.Module, save_path: str, save_type: str) -> None:
+        # Save model to specified path
+    
+    def get_net(self) -> None:
+        # Initialize neural network architecture
+    
+    def get_loss(self, data_point: dict, **args):
+        # Calculate loss function
+    
+    def train(self, save_path: str, load_type: str = None) -> None:
+        # Training procedure
+    
+    def predict(self, load_path: str, load_type: str) -> None:
+        # Make predictions using trained model
+    
+    def plot_fig(self, load_path: str) -> None:
+        # Generate visualization plots
 
-- ```
-  get_net(self)->None:
-  ```
 
-- ```
-  get_loss(self, data_point:dict, **args):
-  ```
-
-- ```
-  train(self, save_path:str, load_type:str=None)->None:
-  ```
-
-- ```
-  predict(self, load_path:str, load_type:str)->None:
-  ```
-
-- ```
-  plot_fig(self, load_path:str)->None:
-  ```
 
 ### 3. Solve the Problem
 
-In the main directory, you will find several examples. For each example, you need to set
+In the main directory, several example scripts are available to guide you through solving a problem. Follow these steps:
 
-- choose the problem, e.g. ,
+- Import the Problem and Solver, e.g. ,
 
   ```
   from Solvers.DL4EVI_1d_Obstacle import Solver
-  ```
-
-- choose the solver, e.g. ,
-
-  ```
   from Problems.Elliptic_1d_Symmetric import Problem
   ```
 
-- set the parameters for problem
+- Set the parameters for problem, e.g. ,
 
   ```
   args_problem =  { 'problem_name': problem_name,
@@ -87,7 +79,7 @@ In the main directory, you will find several examples. For each example, you nee
   ```
 
 
-- set the parameters for solver
+- Set the parameters for solver, e.g. ,
 
   ```
   args_solver =  { 'device': device,
@@ -112,16 +104,21 @@ In the main directory, you will find several examples. For each example, you nee
                    'numpy_dtype': numpy_dtype,
                    'torch_dtype': torch_dtype}
   ```
-
-- If you have a saved model, you only need to run
-
+- For New Training:
+  
   ```
-  demo_example.run(solver = demo_solver,  load_type = 'model_best_loss', status = 'pred')
-  demo_example.run(solver = demo_solver,  load_type = 'model_best_loss', status = 'plot')
+  demo_example.run(solver=demo_solver, load_type = 'model_best_loss',  status='train')
   ```
 
-  If you have a saved model and the corresponding data, you only need to run
+- For Prediction with Saved Model:
+  
+  ```
+  demo_example.run(solver = demo_solver, load_type = 'model_best_loss', status = 'pred')
+  ```
+
+- For Visualization with Saved Model:
 
   ```
-  demo_example.run(solver = demo_solver,  load_type = 'model_best_loss', status = 'plot')
+  demo_example.run(solver = demo_solver, load_type = 'model_best_loss', status = 'plot')
   ```
+Note that trained model, prediction data, and visualization plots all are in the file `SavedData/`.
