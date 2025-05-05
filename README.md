@@ -64,7 +64,7 @@ In the `Solvers/` directory, implement the following key functions:
 
 In the main directory, several example scripts are available to guide you through solving a problem. Follow these steps:
 
-- Import the Problem and Solver, e.g. ,
+- Import the problem and solver, e.g. ,
 
   ```
   from Solvers.DL4EVI_1d_Obstacle import Solver
@@ -110,21 +110,22 @@ In the main directory, several example scripts are available to guide you throug
                    'numpy_dtype': numpy_dtype,
                    'torch_dtype': torch_dtype}
   ```
-- For New Training:
+- For new training:
   
   ```
   demo_example.run(solver=demo_solver, load_type = 'model_best_loss',  status='train')
   ```
 
-- For Prediction with Saved Model:
+- For prediction with saved model:
   
   ```
   demo_example.run(solver = demo_solver, load_type = 'model_best_loss', status = 'pred')
   ```
 
-- For Visualization with Saved Model:
+- For visualization with saved model:
 
   ```
   demo_example.run(solver = demo_solver, load_type = 'model_best_loss', status = 'plot')
   ```
-Note that trained model, prediction data, and visualization plots all are in the file `SavedData/`.
+### 4. Results
+All results, including trained models, prediction data, and visualizations, are stored in the `SavedData/`directory.
