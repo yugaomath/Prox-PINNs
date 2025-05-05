@@ -73,7 +73,7 @@ In the main directory, you will find several examples. For each example, you nee
   from Problems.Elliptic_1d_Symmetric import Problem
   ```
 
-- set the parameters in for problem
+- set the parameters for problem
 
   ```
   args_problem =  { 'problem_name': problem_name,
@@ -87,7 +87,7 @@ In the main directory, you will find several examples. For each example, you nee
   ```
 
 
-- set the parameters in for solver
+- set the parameters for solver
 
   ```
   args_solver =  { 'device': device,
