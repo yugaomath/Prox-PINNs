@@ -1,8 +1,6 @@
 # Prox-PINNs for Solving Elliptic Variational Inequalities
 
 ## Requirements
-The following dependencies are required to run this project:
-
 - Python 3.x
 - NumPy (`numpy`)
 - SciPy (`scipy`)
@@ -11,23 +9,22 @@ The following dependencies are required to run this project:
 
 ## Quick Start Guide
 
-### 1. Problem Definition
-Create a problem file in `Problems/` directory with these essential components:
+###  1. Problem Definition
+Create a problem file in `Problems/` directory with these components:
 
 ```python
 def __init__(self, np_type=np.float64, torch_type=torch.float64, **args):
-    # Define problem domain and parameters
-    self.domain = [...]  
+    self.domain = [...]  # Define problem domain
 
 def fun_u(self, x: torch.Tensor) -> torch.Tensor:
-    # Implement exact solution
-    return ...  
+    return ...  # Exact solution implementation
 
 def fun_f(self, x: torch.Tensor) -> torch.Tensor:
-    # Implement source term
-    return ...
-#### 2. Choose the Solver
+    return ...  # Source term implementation
+```
 
+
+### 2. Solver Implementation
 In the 'Solvers/' directory, you will find several examples of solvers. Within each solver, you can examine the function
 
 - ```
@@ -58,23 +55,7 @@ In the 'Solvers/' directory, you will find several examples of solvers. Within e
   plot_fig(self, load_path:str)->None:
   ```
 
-Note that:
-
-- obstacle problem
-
-  ```
-  DL4EVI_1d.py
-  DL4EVI_2d.py
-  ```
-
-- introduced multiplier
-
-  ```python
-  DL4EVI_1d_Multiplier.py
-  DL4EVI_2d_Multiplier.py
-  ```
-
-#### 3. Solve the Problem
+### 3. Solve the Problem
 
 In the main directory, you will find several examples. For each example, you need to set
 
@@ -90,23 +71,41 @@ In the main directory, you will find several examples. For each example, you nee
   from Problems.Elliptic_1d_Non_Symmetric import Problem
   ```
 
-- set the parameters in dictionary args 
-
-      args = {'device': device,
-              'int_method': 'mesh',
-              'N_int': 200,
-              'N_bd_each_face': 1,
-              'topK': 200,
-              'lr': 1e-3,   
-              'lr_Decay': 2.,
-              'maxIter': 10000,
-              'loss_weight': {'eq':1., 'bd':5.},
-              'activation': 'tanh',
-              'hidden_width': 50,
-              'hidden_layer': 4,
-              'model_type': 'FeedForward',
-              'data_type': {'numpy': np.float64, 'torch': torch.float64},
-              }
+- set the parameters in for problem 
+  '''
+  args_problem = {'problem_name': problem_name,
+                    'problem_dim': 1,
+                    'problem_lb': [0.],
+                    'problem_ub': [1.],
+                    'problem_domain': 'line_segment',
+                    'problem_N_test': 1000,
+                    'numpy_dtype': numpy_dtype,
+                    'torch_dtype': torch_dtype}
+   '''
+- set the parameters in for solver
+  '''
+  args_solver = {'device': device,
+                   'seed': 2025,
+                   'int_method': 'mesh',
+                   'N_int': 50,
+                   'N_bd_each_face': 1,
+                   'topK': 50,               # when topK=N_int, the topK strategy was not used
+                   'NN_in': args_problem['problem_dim'],
+                   'NN_out': args_problem['problem_dim'],
+                   'lr_adam': 1e-3, 
+                   'lr_lbfgs': 1e-1, 
+                   'lr_Decay': 2.,
+                   'Iter_adam': 10000,
+                   'Iter_lbfgs': 0,             # L-BFGS was not employed for refinement 
+                   'loss_weight': {'eq':1., 'bd':5.}, # bd was not used for hard constraint
+                   'activation': 'tanh',
+                   'hidden_layer': 3,
+                   'hidden_width': 100,
+                   'model_type': 'FeedForward_Constraint', # 'FeedForward', 'FeedForward_Constraint', 'FeedForward_Constraint_Partial_Constraint' 
+                   'eta': 1e-3,
+                   'numpy_dtype': numpy_dtype,
+                   'torch_dtype': torch_dtype}
+  '''
 
 - If you have a saved model, you only need to run
 
