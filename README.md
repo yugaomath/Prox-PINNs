@@ -37,25 +37,25 @@ def evi_pinn(self, model: torch.nn.Module, x: torch.tensor) -> torch.tensor:
 In the `Solvers/` directory, implement the following key functions:
 
 ```python
-    def _load(self, model: torch.nn.Module, load_path: str, load_type: str) -> None:
+def _load(self, model: torch.nn.Module, load_path: str, load_type: str) -> None:
         # Load model from specified path
     
-    def _save(self, model: torch.nn.Module, save_path: str, save_type: str) -> None:
+def _save(self, model: torch.nn.Module, save_path: str, save_type: str) -> None:
         # Save model to specified path
     
-    def get_net(self) -> None:
+def get_net(self) -> None:
         # Initialize neural network architecture
     
-    def get_loss(self, data_point: dict, **args):
+def get_loss(self, data_point: dict, **args):
         # Calculate loss function
     
-    def train(self, save_path: str, load_type: str = None) -> None:
+def train(self, save_path: str, load_type: str = None) -> None:
         # Training procedure
     
-    def predict(self, load_path: str, load_type: str) -> None:
+def predict(self, load_path: str, load_type: str) -> None:
         # Make predictions using trained model
     
-    def plot_fig(self, load_path: str) -> None:
+def plot_fig(self, load_path: str) -> None:
         # Generate visualization plots
 ```
 
