@@ -28,3 +28,26 @@ def fun_f(self, x: torch.Tensor) -> torch.Tensor:
     
 def evi_pinn(self, model: torch.nn.Module, x: torch.Tensor) -> torch.Tensor:
     """Define loss function for the equation"""
+
+### 2. Choose the Solver
+The Solvers/ directory contains various solver implementations. Key components include:
+_load(self, model: torch.nn.Module, load_path: str, load_type: str) -> None:
+    """Load model from file"""
+
+_save(self, model: torch.nn.Module, save_path: str, save_type: str) -> None:
+    """Save model to file"""
+
+get_net(self) -> None:
+    """Initialize neural network architecture"""
+
+get_loss(self, data_point: dict, **args):
+    """Compute loss function"""
+
+train(self, save_path: str, load_type: str = None) -> None:
+    """Train the model"""
+
+predict(self, load_path: str, load_type: str) -> None:
+    """Make predictions with trained model"""
+
+plot_fig(self, load_path: str) -> None:
+    """Generate visualization plots"""
