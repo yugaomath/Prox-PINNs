@@ -21,6 +21,8 @@ def fun_u(self, x: torch.Tensor) -> torch.Tensor:
 
 def fun_f(self, x: torch.Tensor) -> torch.Tensor:
     return ...  # Source term implementation
+
+def evi_pinn(self, model:torch.nn.Module, x:torch.tensor)->torch.tensor:
 ```
 
 
@@ -71,9 +73,10 @@ In the main directory, you will find several examples. For each example, you nee
   from Problems.Elliptic_1d_Non_Symmetric import Problem
   ```
 
-- set the parameters in for problem 
-  '''
-  args_problem = {'problem_name': problem_name,
+- set the parameters in for problem
+
+  ```
+  args_problem = {  'problem_name': problem_name,
                     'problem_dim': 1,
                     'problem_lb': [0.],
                     'problem_ub': [1.],
@@ -81,10 +84,13 @@ In the main directory, you will find several examples. For each example, you nee
                     'problem_N_test': 1000,
                     'numpy_dtype': numpy_dtype,
                     'torch_dtype': torch_dtype}
-   '''
+  ```
+
+
 - set the parameters in for solver
-  '''
-  args_solver = {'device': device,
+
+  ```
+  args_solver = {  'device': device,
                    'seed': 2025,
                    'int_method': 'mesh',
                    'N_int': 50,
@@ -105,7 +111,7 @@ In the main directory, you will find several examples. For each example, you nee
                    'eta': 1e-3,
                    'numpy_dtype': numpy_dtype,
                    'torch_dtype': torch_dtype}
-  '''
+  ```
 
 - If you have a saved model, you only need to run
 
