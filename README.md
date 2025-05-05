@@ -36,7 +36,7 @@ def evi_pinn(self, model: torch.nn.Module, x: torch.tensor) -> torch.tensor:
 ### 2. Solver Implementation
 In the `Solvers/` directory, implement the following key functions:
 
-
+```python
     def _load(self, model: torch.nn.Module, load_path: str, load_type: str) -> None:
         # Load model from specified path
     
@@ -57,7 +57,7 @@ In the `Solvers/` directory, implement the following key functions:
     
     def plot_fig(self, load_path: str) -> None:
         # Generate visualization plots
-
+```
 
 
 ### 3. Solve the Problem
@@ -66,14 +66,14 @@ In the main directory, several example scripts are available to guide you throug
 
 - Import the problem and solver, e.g. ,
 
-  ```
+  ```python
   from Solvers.DL4EVI_1d_Obstacle import Solver
   from Problems.Elliptic_1d_Symmetric import Problem
   ```
 
 - Set the parameters for problem, e.g. ,
 
-  ```
+  ```python
   args_problem =  { 'problem_name': problem_name,
                     'problem_dim': 1,
                     'problem_lb': [0.],
@@ -87,7 +87,7 @@ In the main directory, several example scripts are available to guide you throug
 
 - Set the parameters for solver, e.g. ,
 
-  ```
+  ```python
   args_solver =  { 'device': device,
                    'seed': 2025,
                    'int_method': 'mesh',
@@ -112,19 +112,19 @@ In the main directory, several example scripts are available to guide you throug
   ```
 - For new training:
   
-  ```
+  ```python
   demo_example.run(solver=demo_solver, load_type = 'model_best_loss',  status='train')
   ```
 
 - For prediction with saved model:
   
-  ```
+  ```python
   demo_example.run(solver = demo_solver, load_type = 'model_best_loss', status = 'pred')
   ```
 
 - For visualization with saved model:
 
-  ```
+  ```python
   demo_example.run(solver = demo_solver, load_type = 'model_best_loss', status = 'plot')
   ```
 ### 4. Results
