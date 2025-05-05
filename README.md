@@ -1,5 +1,11 @@
 # Prox-PINNs for Solving Elliptic Variational Inequalities
 
+This repository provides an implementation of **Prox-PINNs**, a novel deep learning algorithmic framework that integrates proximal operators with physics-informed neural networks (**PINNs**) to solve a broad class of elliptic variational inequalities (**EVIs**).
+
+📄 **Paper:** ["Prox-PINNs: A Deep Learning Algorithmic Framework for Elliptic Variational Inequalities"](https://arxiv.org/) 
+
+👥 **Authors:** Yu Gao, Yongcun Song, Zhiyu Tan, Hangrui Yue, and Shangzhi Zeng
+
 ## Requirements
 - Python 3.x
 - NumPy
